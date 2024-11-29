@@ -112,12 +112,12 @@ async def scrape_reddit():
         user_agent = ua.random
 
         page = await browser.new_page(user_agent=user_agent)
-        new_sheet_name = "Reddit AusPropertyChat Data"
+        new_sheet_name = "Reddit AusProperty Data"
 
         worksheet = retry_request(lambda: file.open('Home Buyer Concerns'))
 
         try:
-            await page.goto("https://www.reddit.com/r/AusPropertyChat/", timeout=30000)
+            await page.goto("https://www.reddit.com/r/AusProperty/", timeout=30000)
         except PlaywrightTimeoutError:
             print("Page load timed out.")
             await browser.close()
@@ -151,7 +151,7 @@ async def scrape_reddit():
                     link_tags = await content_div.query_selector_all('a')
                     links = [
                         (await link.get_attribute('href')).replace('/r/ausproperty/',
-                                                                   'https://www.reddit.com/r/AusPropertyChat/')
+                                                                   'https://www.reddit.com/r/AusProperty/')
                         for link in link_tags if await link.get_attribute('href')
                     ]
 
