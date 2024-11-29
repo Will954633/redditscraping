@@ -99,7 +99,7 @@ def fetch_reddit_data(api_url, headers):
 def scrape_reddit():
     """Main function to scrape Reddit data and store in Google Sheets."""
     print("Scraping started...")
-    new_sheet_name = "Reddit AusProperty Data"
+    new_sheet_name = "Reddit AusPropertyChat Data"
     worksheet = retry_request(lambda: FILE.open('Home Buyer Concerns'))
 
     sheet = worksheet.worksheet(new_sheet_name) if sheet_exists(worksheet, new_sheet_name) else create_new_sheet(worksheet, new_sheet_name)
@@ -111,7 +111,7 @@ def scrape_reddit():
     trigger_url = "https://api.brightdata.com/datasets/v3/trigger?dataset_id=gd_lvz8ah06191smkebj4&include_errors=true&type=discover_new&discover_by=subreddit_url"
     snapshot_base_url = "https://api.brightdata.com/datasets/v3/snapshot"
     headers = {"Authorization": "Bearer 80901a9d-4a65-4b5d-8744-d8edc874f5f6", "Content-Type": "application/json"}
-    payload = [{"url": "https://www.reddit.com/r/AusProperty/", "sort_by": "New"}]
+    payload = [{"url": "https://www.reddit.com/r/AusPropertyChat/", "sort_by": "New"}]
 
     # Trigger API
     trigger_response = requests.post(trigger_url, headers=headers, data=json.dumps(payload))
